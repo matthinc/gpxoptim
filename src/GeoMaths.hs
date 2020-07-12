@@ -19,4 +19,7 @@ segmentLength segment = pointArrayDist $ points segment
   where pointArrayDist [a]        = 0
         pointArrayDist [a, b]     = (a `distanceTo` b)
         pointArrayDist (a:b:rest) = (a `distanceTo` b) + pointArrayDist (b:rest)
-        
+
+-- | Total length of GPX route
+gpxLength :: GPX -> Double
+gpxLength gpx = foldl (\a b -> a + (segmentLength b)) 0 (segments gpx)

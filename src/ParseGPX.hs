@@ -40,7 +40,7 @@ processSegmentNode node = Right $ Segment points
 
 processPointNode :: Node -> Either String Point
 processPointNode node = case nodeName node of
-  "trkpt" -> Right $ Point { lat = (nodeAttrDouble "lat"), lng = (nodeAttrDouble "lng") }
+  "trkpt" -> Right $ Point { lat = (nodeAttrDouble "lat"), lng = (nodeAttrDouble "lon") }
   _     -> Left "Node type should be 'trkpt'"
   where nodeAttrDouble attr = read (nodeAttr node attr) :: Double
 
