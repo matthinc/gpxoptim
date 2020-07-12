@@ -37,7 +37,6 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - gpxoptim
-
 tests:
   gpxoptim-test:
     main:                Spec.hs

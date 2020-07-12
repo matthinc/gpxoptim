@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      GeoMaths
       ParseGPX
       Types
   other-modules:
@@ -55,6 +56,7 @@ test-suite gpxoptim-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      GeoMathsSpec
       ParserSpec
       Paths_gpxoptim
   hs-source-dirs:
