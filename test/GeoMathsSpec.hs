@@ -28,4 +28,9 @@ spec = do
     it "calculate length of complex route" $ do
       testData <- testDataFromFile
       (gpxLength testData) `shouldSatisfy` (\n -> n > 70000 && n < 80000)
+    it "calculate bounds" $
+      (segmentBounds testSegment) `shouldBe` Bounds (48.1451335, 11.613819, 48.157058, 11.641963)
+    it "calculate bounds of complex route" $ do
+      testData <- testDataFromFile
+      (gpxBounds testData) `shouldBe` Bounds (47.972416, 11.348251, 48.137755, 11.610477)
       

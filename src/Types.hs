@@ -13,3 +13,7 @@ data Segment = Segment { points :: [Point] }
 data Point = Point { lat :: Double,
                      lng :: Double }
              deriving (Show, Eq)
+
+-- | (min lat, min lng, max lat, max lng)
+data Bounds = Bounds (Double, Double, Double, Double)
+  deriving (Show, Eq)
