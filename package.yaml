@@ -23,6 +23,7 @@ dependencies:
 - base >= 4.7 && < 5
 - xeno
 - bytestring >= 0.10.10
+- containers
 
 library:
   source-dirs: src

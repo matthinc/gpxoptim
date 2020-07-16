@@ -5,6 +5,7 @@ import GeoMaths
 import ParseGPX
 import Types
 import Data.Either (fromRight, fromLeft)
+import qualified Data.Set as Set
 
 testSegment = Segment [
   Point { lat = 48.145427, lng = 11.613819},
@@ -33,4 +34,7 @@ spec = do
     it "calculate bounds of complex route" $ do
       testData <- testDataFromFile
       (gpxBounds testData) `shouldBe` Bounds (47.972416, 11.348251, 48.137755, 11.610477)
+    it "scale to grid complex route" $ do
+      testData <- testDataFromFile
+      (scaleToGrid testData 5 5) `shouldBe` Set.fromList [(0,0),(0,1),(0,2),(1,0),(1,1),(1,2),(2,0),(2,1),(2,2),(3,1),(3,2),(3,3),(3,4),(4,2),(4,3),(4,4),(4,5),(5,4)]
       

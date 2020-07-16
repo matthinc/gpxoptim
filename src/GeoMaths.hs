@@ -1,6 +1,7 @@
 module GeoMaths where
 
 import Types
+import qualified Data.Set as Set
 
 -- Minimum / maximum values for latitude and longitude
 latRange = (-90.0, 90)
@@ -42,7 +43,19 @@ gpxBounds gpx = walkSegments (segments gpx) $ Bounds  ((snd latRange), (snd lngR
             walkSegments ps (mergeBounds bounds $ segmentBounds p)
         walkSegments [] bounds = bounds
 
+-- | Merge two bound objects
 mergeBounds :: Bounds -> Bounds -> Bounds
 mergeBounds a b = let Bounds (aLatMin, aLngMin, aLatMax, aLngMax) = a
                       Bounds (bLatMin, bLngMin, bLatMax, bLngMax) = b in
                     Bounds (min aLatMin bLatMin, min aLngMin bLngMin, max aLatMax bLatMax, max aLngMax bLngMax)
+
+-- | Scale to grid
+scaleToGrid :: GPX -> Int -> Int -> Set.Set (Int, Int)
+scaleToGrid gpx width height = foldl (\a b -> (pointToGrid b a)) Set.empty getAllPoints
+  where pointToGrid p set = let Bounds (latMin, lngMin, latMax, lngMax) = gpxBounds gpx
+                                x = floor $ (( (lng p) - lngMin) / (lngMax - lngMin)) * (fromIntegral width)
+                                y = floor $ (( (lat p) - latMin) / (latMax - latMin)) * (fromIntegral height) in
+                              Set.insert (x, y) set
+        getAllPoints = foldl (\a b -> a ++ (points b)) [] (segments gpx)
+
+        
