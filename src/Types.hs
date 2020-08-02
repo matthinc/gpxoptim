@@ -17,3 +17,8 @@ data Point = Point { lat :: Double,
 -- | (min lat, min lng, max lat, max lng)
 data Bounds = Bounds (Double, Double, Double, Double)
   deriving (Show, Eq)
+
+-- | Command
+data Command = CommandTrimStart Integer
+             | CommandTrimEnd Integer
+             deriving (Show, Eq)

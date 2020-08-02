@@ -24,9 +24,12 @@ dependencies:
 - xeno
 - bytestring >= 0.10.10
 - containers
+- parsec >= 3.1.14.0
 
 library:
-  source-dirs: src
+  source-dirs:
+  - src
+  - src/commands
 
 executables:
   gpxoptim-exe:

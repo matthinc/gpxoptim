@@ -25,18 +25,22 @@ source-repository head
 
 library
   exposed-modules:
+      Arguments
       GeoMaths
       ParseGPX
       Types
       Visualization
+      TrimStart
   other-modules:
       Paths_gpxoptim
   hs-source-dirs:
       src
+      src/commands
   build-depends:
       base >=4.7 && <5
     , bytestring >=0.10.10
     , containers
+    , parsec >=3.1.14.0
     , xeno
   default-language: Haskell2010
 
@@ -52,6 +56,7 @@ executable gpxoptim-exe
     , bytestring >=0.10.10
     , containers
     , gpxoptim
+    , parsec >=3.1.14.0
     , xeno
   default-language: Haskell2010
 
@@ -59,6 +64,7 @@ test-suite gpxoptim-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      CommandsSpec
       GeoMathsSpec
       ParserSpec
       Paths_gpxoptim
@@ -72,5 +78,6 @@ test-suite gpxoptim-test
     , gpxoptim
     , hspec
     , hspec-discover
+    , parsec >=3.1.14.0
     , xeno
   default-language: Haskell2010
