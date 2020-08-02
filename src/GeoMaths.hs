@@ -58,4 +58,9 @@ scaleToGrid gpx width height = foldl (\a b -> (pointToGrid b a)) Set.empty getAl
                               Set.insert (x, y) set
         getAllPoints = foldl (\a b -> a ++ (points b)) [] (segments gpx)
 
-        
+-- | distance at segment[p] -> segment[p + 1].
+distanceAt :: Segment -> Int -> Double
+distanceAt segment pos
+  | length ps < pos + 2 = 0.0
+  | otherwise           = (ps !! pos) `distanceTo` (ps !! (pos + 1))
+    where ps = points segment
