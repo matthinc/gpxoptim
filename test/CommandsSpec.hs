@@ -3,7 +3,7 @@ module CommandsSpec ( spec ) where
 import Test.Hspec
 import Types
 import TrimStart
-import Arguments
+import Commands
 
 testSegment = Segment [
   Point { lat = 48.145427, lng = 11.613819},

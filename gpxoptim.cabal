@@ -25,7 +25,7 @@ source-repository head
 
 library
   exposed-modules:
-      Arguments
+      Commands
       GeoMaths
       ParseGPX
       Types

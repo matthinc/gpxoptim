@@ -1,4 +1,4 @@
-module Arguments where
+module Commands where
 
 import Text.ParserCombinators.Parsec
 import Types
