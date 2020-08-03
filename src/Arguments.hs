@@ -3,6 +3,22 @@ module Arguments where
 import Text.ParserCombinators.Parsec
 import Types
 
+import TrimStart
+
+-- | Execute commands string
+runCommands :: String -> GPX -> GPX
+runCommands commands gpx = foldl (\a b -> (runCommand a b)) gpx cmds
+  where cmds = case (parse parseCommands "" commands) of
+          Right c -> c
+          Left _  -> []
+
+runCommand :: GPX -> Command -> GPX
+runCommand gpx command = case command of
+  CommandTrimStart len -> trimStart gpx len
+  _                    -> gpx
+
+---------- Parse ----------
+
 parseCommands :: Parser [Command]
 parseCommands = many1 parseCommandWithSemicolon
 
@@ -10,6 +26,7 @@ parseCommands = many1 parseCommandWithSemicolon
 parseCommandWithSemicolon :: Parser Command
 parseCommandWithSemicolon = do
   cmd <- parseCommand
+  spaces
   char ';'
   spaces
   pure cmd

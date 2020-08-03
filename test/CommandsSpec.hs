@@ -3,6 +3,7 @@ module CommandsSpec ( spec ) where
 import Test.Hspec
 import Types
 import TrimStart
+import Arguments
 
 testSegment = Segment [
   Point { lat = 48.145427, lng = 11.613819},
@@ -22,4 +23,10 @@ spec = do
       segments (trimStart testGPX 600) `shouldBe` [Segment { points = [Point { lat = 48.147907, lng = 11.632161}, Point { lat = 48.157058, lng = 11.641963}]}]
     it "test trim_start (1200m)" $
       segments (trimStart testGPX 1200) `shouldBe` [Segment { points = [Point { lat = 48.157058, lng = 11.641963}]}]
+    it "test commands string 1" $
+      runCommands "trim_start(600m);" testGPX `shouldBe` (trimStart testGPX 600)
+    it "test commands string 2" $
+      runCommands "trim_start  ( 600m  ) ;" testGPX `shouldBe` (trimStart testGPX 600)
+    it "test commands string 3" $
+      runCommands "trim_start(600m); trim_start(600m);" testGPX `shouldBe` (trimStart (trimStart testGPX 600) 600)
       
