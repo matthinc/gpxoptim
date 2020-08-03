@@ -13,16 +13,21 @@ visualizeTrack track width height = map (\n -> row n) $ take height [height, hei
 
 drawMap :: GPX -> Int -> Int -> String
 drawMap track width height = frameTop ++ concatMap frameLine (visualizeTrack track width height) ++ frameBottom
-  where frameTop = "╠" ++ (replicate width '═') ++ "╣\n"
+  where frameTop = "╔" ++ (replicate width '═') ++ "╗\n"
         frameBottom = "╚" ++ (replicate width '═') ++ "╝"
         frameLine content = "║" ++ content ++ "║\n"
 
 writeData :: GPX -> String
-writeData track = fillString ("║ Name: " ++ name) 40 ++ "║\n" ++
-                  "║ Length:        " ++ (show $ floor $ gpxLength track) ++ "m\n" ++
-                  "║ GPX segments:  " ++ (show $ length $ segments track)
+writeData track = "Name:     " ++ name ++ "\n" ++
+                  "Length:   " ++ (formatDistance $ gpxLength track) ++ "\n" ++
+                  "Segments: " ++ (show $ length $ segments track)
   where name = case trackName track of
           Nothing -> "(no name)"
           Just n -> n
         fillString str len = str ++ (replicate (len - length str) ' ')
 
+formatDistance :: Double -> String
+formatDistance dist
+  | dist < 5000    = (show $ floor dist) ++ "m"
+  | dist < 1000000 = (take 5 (show $ dist / 1000)) ++ "km"
+  | otherwise      = (show (floor (dist / 1000))) ++ "km"
