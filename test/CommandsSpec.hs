@@ -4,15 +4,7 @@ import Test.Hspec
 import Types
 import TrimStart
 import Commands
-
-testSegment = Segment [
-  Point { lat = 48.145427, lng = 11.613819},
-  Point { lat = 48.1451335, lng = 11.6225522},
-  Point { lat = 48.147907, lng = 11.632161},
-  Point { lat = 48.157058, lng = 11.641963}
-  ]
-
-testGPX = GPX { segments = [testSegment], trackName = Just "test" }
+import TestUtils
 
 spec :: Spec
 spec = do
