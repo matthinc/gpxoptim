@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Commands
+      Export
       GeoMaths
       ParseGPX
       Types
@@ -67,6 +68,7 @@ test-suite gpxoptim-test
       CommandsSpec
       GeoMathsSpec
       ParserSpec
+      TestUtils
       Paths_gpxoptim
   hs-source-dirs:
       test
